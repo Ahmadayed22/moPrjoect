@@ -6,7 +6,7 @@
 
 .first-upload-screen {
   display: grid;
-  grid-template-rows: 228px 1fr 48px;
+  grid-template-rows: 280px 1fr 48px;
   min-height: 100vh;
   background: #f4f6f9;
 }
@@ -14,9 +14,10 @@
 .first-upload-header {
   position: relative;
   display: grid;
-  grid-template-rows: auto 1fr;
-  align-items: start;
-  padding: 20px 26px 28px;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-rows: 1fr;
+  align-items: center;
+  padding: 24px 42px;
   color: #ffffff;
   background: #07376f;
 }
@@ -27,24 +28,29 @@
   justify-content: space-between;
   gap: 20px;
   width: 100%;
+  grid-column: 1 / -1;
+  grid-row: 1;
 }
 
 .first-upload-brand {
   line-height: 1;
-  font-size: 22px;
+  font-size: 50px;
   font-weight: 900;
   letter-spacing: 1px;
 }
 
 .first-upload-summary {
-  align-self: end;
+  grid-column: 2;
+  grid-row: 1;
+  align-self: center;
   justify-self: center;
   text-align: center;
   text-transform: uppercase;
+  z-index: 1;
 }
 
 .first-upload-summary h1 {
-  margin: 0 0 22px;
+  margin: 0;
   color: #ffffff;
   font-size: 26px;
   line-height: 1;
@@ -81,8 +87,8 @@
 }
 
 .first-upload-avatar {
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 200px;
   object-fit: contain;
   /* background: #ffffff; */
   border-radius: 6px;
@@ -129,6 +135,7 @@
   gap: 14px;
   align-items: stretch;
   margin-bottom: 5px;
+  padding: 20px ;
 }
 
 .upload-section,
@@ -407,8 +414,8 @@ button {
 
 .philips-mark {
   justify-self: end;
-  width: 100px;
-  height: 90px;
+  width: 150px;
+
   object-fit: contain;
   /* background: #ffffff; */
   border-radius: 6px;
@@ -684,15 +691,28 @@ button {
 
   .first-upload-header {
     grid-template-columns: none;
+    grid-template-rows: auto auto;
     gap: 18px;
     padding: 18px;
   }
 
+  .first-upload-brand-lockup {
+    grid-row: auto;
+  }
+
   .first-upload-brand {
     margin-inline: 0;
+    font-size: 22px;
+  }
+
+  .first-upload-avatar {
+    width: 100px;
+    height: 100px;
   }
 
   .first-upload-summary {
+    grid-column: auto;
+    grid-row: auto;
     padding-top: 12px;
   }
 
@@ -730,11 +750,11 @@ button {
     font-size: 16px;
   }
 
-  /* .philips-mark {
+  .philips-mark {
     justify-self: end;
     width: 100px;
-    height: 54px;
-  } */
+    
+  }
 
   .summary-title h1 {
     margin-bottom: 8px;

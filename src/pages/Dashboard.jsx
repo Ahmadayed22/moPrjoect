@@ -24,15 +24,12 @@ const groupByHospital = (rows) => {
 }
 
 const demoRows = [
-  ['Advocate Good Samaritan Hospital', 'Mohammad Ayed', 'WO-13428954', 'Ben', 'Sam', 'Kevin'],
-  ['Advocate Good Samaritan Hospital', 'Mohammad Ayed', 'WO-13427010', 'Ben', 'Sam', 'Kevin'],
-  ['Advocate Good Shepherd Hospital', 'Sarah Mansour', 'WO-13428903', 'Tim', 'Antwan', 'Sam'],
-  ['Advocate Illinois Masonic Med Ctr', 'Khaled Omar', 'WO-13427214', 'Antwan', 'Francisco', 'Ben'],
-  ['Edward Hospital', 'Omar Zaid', 'WO-13427117', 'Mark', 'Sam', 'Kevin'],
-  ['Franciscan Alliance Inc', 'Yazan Saleh', 'WO-13428764', 'John', 'Sam', 'Kevin'],
-  ['Northwestern Memorial Hospital', 'Heba Karim', 'WO-13426976', 'Francisco', 'Antwan', 'Ben'],
-  ['Swedish Covenant Hospital', 'Noor Sami', 'WO-13428978', 'Antwan', 'Francisco', 'Sam'],
-].map(([hospitalName, personName, workOrder, primaryFc, secondaryFc, tertiaryFc], index) => ({
+  ['Riverbend Regional Medical Center', 'FCO83921470', 'WO-78264193', 'Mark', 'Sam', 'Kevin', 'Unscheduled'],
+  ['Cedar Valley Heart Institute', 'FCO10458732', 'WO-61839427', 'Ben', 'Sam', 'Kevin', 'Unscheduled'],
+  ['Cedar Valley Heart Institute', 'FCO59021684', 'WO-92573106', 'Ben', 'Sam', 'Kevin', 'Unscheduled'],
+  ['Oak Hollow University Hospital', 'FCO80431296', 'WO-65021874', 'Francisco', 'Antwan', 'Ben', 'scheduled'],
+  ['Maple Grove Covenant Hospital', 'FCO52690471', 'WO-47260518', 'Antwan', 'Francisco', 'Sam', 'Unscheduled'],
+].map(([hospitalName, personName, workOrder, primaryFc, secondaryFc, tertiaryFc, scheduledStatus], index) => ({
   id: `demo-${index}`,
   hospitalName,
   personName,
@@ -40,7 +37,7 @@ const demoRows = [
   primaryFc,
   secondaryFc,
   tertiaryFc,
-  scheduledStatus: 'Unscheduled',
+  scheduledStatus,
 }))
 
 const isUnscheduled = (row) => row.scheduledStatus.trim().toLowerCase() === 'unscheduled'
