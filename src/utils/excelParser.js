@@ -4,11 +4,12 @@ const SUPPORTED_EXTENSIONS = ['xlsx', 'xls', 'csv']
 
 const columnAliases = {
   hospitalName: ['IP Customer','hospital name', 'hospital', 'site'],
-  personName: ['Customer Contact','person name', 'person', 'contact name', 'contact'],
+  personName: ['FCO Number','Customer Contact','person name', 'person', 'contact name', 'contact'],
   workOrder: ['WO','work order', 'workorder', 'WO', 'work order id'],
   primaryFc: ['primary fc', 'Primary FSE', 'primary'],
   secondaryFc: ['secondary fc', 'Secondary FSE', 'secondary'],
   tertiaryFc: ['tertiary fc', 'Tertiary FSE', 'tertiary'],
+  scheduledStatus: ['Scheduled?', 'scheduled', 'schedule status', 'status'],
 }
 
 const normalizeHeader = (value) =>
@@ -55,6 +56,7 @@ export async function parseScheduleFile(file) {
       primaryFc: getCell(row, columnAliases.primaryFc),
       secondaryFc: getCell(row, columnAliases.secondaryFc),
       tertiaryFc: getCell(row, columnAliases.tertiaryFc),
+      scheduledStatus: getCell(row, columnAliases.scheduledStatus),
     }))
     .filter((row) => row.hospitalName || row.workOrder)
 }

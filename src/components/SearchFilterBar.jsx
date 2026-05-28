@@ -17,7 +17,7 @@ function SearchFilterBar({ search, onSearchChange, fcFilter, onFcFilterChange, f
       <label className="select-field">
         <SlidersHorizontal size={18} aria-hidden="true" />
         <select value={fcFilter} onChange={(event) => onFcFilterChange(event.target.value)}>
-          <option value="">All FCE Names</option>
+          <option value="">All FSE Names</option>
           {fcOptions.map((fc) => (
             <option key={fc} value={fc}>
               {fc}

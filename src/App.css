@@ -394,6 +394,10 @@ button {
   font-size: 38px;
 }
 
+.summary-title .total-orders-count {
+  font-size: 36px;
+}
+
 .summary-title span {
   display: block;
   margin-top: 6px;
@@ -1144,6 +1148,42 @@ button {
 
   .order-main span {
     font-size: 6px;
+  }
+}
+
+@media (max-width: 390px) {
+  .table-header,
+  .hospital-card {
+    grid-template-columns: 112px minmax(0, 1fr);
+    gap: 6px;
+  }
+
+  .work-order-row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    min-height: auto;
+  }
+
+  .order-main {
+    grid-template-columns: minmax(0, 1fr) 16px;
+  }
+
+  .work-order-title a {
+    overflow-wrap: normal;
+  }
+
+  .order-main strong {
+    font-size: 8px;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  .order-main span {
+    font-size: 6px;
+  }
+
+  .assignment-grid {
+    width: 100%;
   }
 }
 

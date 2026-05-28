@@ -11,7 +11,8 @@ function DashboardHeader({ totalOrders, scheduledOrders, remainingOrders }) {
       <div className="summary-title">
         <h1>Scheduling Summary</h1>
         <p>
-          <strong>{scheduledOrders}</strong> out of <strong>{totalOrders}</strong> work orders already scheduled
+          <strong>{scheduledOrders}</strong> out of <strong className="total-orders-count">{totalOrders}</strong> work
+          orders already scheduled
         </p>
         <span>{remainingOrders} work orders remaining</span>
       </div>

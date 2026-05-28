@@ -40,7 +40,20 @@ const demoRows = [
   primaryFc,
   secondaryFc,
   tertiaryFc,
+  scheduledStatus: 'Unscheduled',
 }))
+
+const isUnscheduled = (row) => row.scheduledStatus.trim().toLowerCase() === 'unscheduled'
+
+const isScheduled = (row) => {
+  const status = row.scheduledStatus.trim().toLowerCase()
+
+  if (status) {
+    return status !== 'unscheduled'
+  }
+
+  return Boolean(row.primaryFc || row.secondaryFc || row.tertiaryFc)
+}
 
 function Dashboard() {
   const dashboardRef = useRef(null)
@@ -52,15 +65,20 @@ function Dashboard() {
   const [isExporting, setIsExporting] = useState(false)
   const [error, setError] = useState('')
 
-  const fcOptions = useMemo(() => {
-    const names = rows.map((row) => row.primaryFc).filter(Boolean)
-    return [...new Set(names)].sort((a, b) => a.localeCompare(b))
+  const remainingRows = useMemo(() => {
+    const hasScheduledStatus = rows.some((row) => row.scheduledStatus)
+    return hasScheduledStatus ? rows.filter(isUnscheduled) : rows
   }, [rows])
+
+  const fcOptions = useMemo(() => {
+    const names = remainingRows.map((row) => row.primaryFc).filter(Boolean)
+    return [...new Set(names)].sort((a, b) => a.localeCompare(b))
+  }, [remainingRows])
 
   const filteredRows = useMemo(() => {
     const query = search.trim().toLowerCase()
 
-    return rows.filter((row) => {
+    return remainingRows.filter((row) => {
       const matchesSearch =
         !query ||
         [row.hospitalName, row.personName, row.workOrder]
@@ -70,11 +88,13 @@ function Dashboard() {
 
       return matchesSearch && matchesFc
     })
-  }, [fcFilter, rows, search])
+  }, [fcFilter, remainingRows, search])
 
   const hospitals = useMemo(() => groupByHospital(filteredRows), [filteredRows])
-  const scheduledOrders = rows.filter((row) => row.primaryFc || row.secondaryFc || row.tertiaryFc).length
-  const remainingOrders = Math.max(rows.length - scheduledOrders, 0)
+  const scheduledOrders = rows.filter(isScheduled).length
+  const remainingOrders = rows.some((row) => row.scheduledStatus)
+    ? rows.filter(isUnscheduled).length
+    : Math.max(rows.length - scheduledOrders, 0)
 
   const primaryCounts = useMemo(() => {
     const counts = filteredRows.reduce((acc, row) => {
