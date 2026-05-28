@@ -1,4 +1,4 @@
-import philipsLogo from '../assets/Phillips-Logo.webp'
+import philipsLogo from '../assets/Phillips-Logo.png'
 
 function PhilipsMark() {
   return <img className="philips-mark" src={philipsLogo} alt="Philips logo" />

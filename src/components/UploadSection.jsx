@@ -36,11 +36,9 @@ function UploadSection({ onFileSelected, isLoading, error, variant = 'compact' }
         {isHero ? <FolderOpen size={52} aria-hidden="true" /> : <UploadCloud size={28} aria-hidden="true" />}
       </div>
       <div className="upload-copy">
-        <h2>{isHero ? 'Upload your scheduling Excel file' : 'Upload schedule file'}</h2>
+        <h2>{isHero ? 'Upload your scheduling Excel file' : 'Upload file'}</h2>
         <p>
-          {isHero
-            ? 'Drag & drop here, or click to browse'
-            : 'Excel or CSV source with hospital, person, work order, and FC columns.'}
+          Drag & drop here, or click to browse
         </p>
         {isHero ? (
           <div className="file-type-pills">

@@ -5,8 +5,8 @@ import ExportButton from '../components/ExportButton'
 import HospitalCard from '../components/HospitalCard'
 import SearchFilterBar from '../components/SearchFilterBar'
 import UploadSection from '../components/UploadSection'
-// import philipsLogo from '../assets/Phillips-Logo.jpg'
-import philipsLogo2 from '../assets/Phillips-Logo.webp'
+import philipsLogo from '../assets/Phillips-Logo.png'
+// import philipsLogo2 from '../assets/Phillips-Logo.webp'
 import { exportNodeAsPng } from '../utils/exportImage'
 import { parseScheduleFile } from '../utils/excelParser'
 
@@ -143,7 +143,7 @@ function Dashboard() {
               <b>0</b> work orders remaining (these are the rest)
             </span>
           </div>
-          <img className="first-upload-avatar" src={philipsLogo2} alt="Philips logo" />
+          <img className="first-upload-avatar" src={philipsLogo} alt="Philips logo" />
         </header>
 
         <section className="first-upload-body">
@@ -210,19 +210,21 @@ function Dashboard() {
           </div>
         )}
 
-        {primaryCounts.length ? (
-          <footer className="dashboard-footer">
-            <strong>Primary WO count</strong>
-            <div className="count-legend">
-              {primaryCounts.map(([name, count], index) => (
-                <span key={name}>
-                  <i style={{ '--dot-color': `var(--legend-${(index % 6) + 1})` }} />
-                  {name}: {count}
-                </span>
-              ))}
-            </div>
-          </footer>
-        ) : null}
+        <footer className="dashboard-footer">
+          <strong>Primary WO count</strong>
+          <div className="count-legend">
+            {primaryCounts.map(([name, count], index) => (
+              <span key={name}>
+                <i style={{ '--dot-color': `var(--legend-${(index % 6) + 1})` }} />
+                {name}: {count}
+              </span>
+            ))}
+          </div>
+        </footer>
+        <footer className="first-upload-footer">
+          <Heart size={13} fill="currentColor" aria-hidden="true" />
+          <span>Together, we make life better</span>
+        </footer>
       </section>
     </main>
   )
