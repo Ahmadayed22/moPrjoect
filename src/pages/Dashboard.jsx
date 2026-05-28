@@ -5,7 +5,8 @@ import ExportButton from '../components/ExportButton'
 import HospitalCard from '../components/HospitalCard'
 import SearchFilterBar from '../components/SearchFilterBar'
 import UploadSection from '../components/UploadSection'
-import philipsLogo from '../assets/Phillips-Logo.jpg'
+// import philipsLogo from '../assets/Phillips-Logo.jpg'
+import philipsLogo2 from '../assets/Phillips-Logo.webp'
 import { exportNodeAsPng } from '../utils/exportImage'
 import { parseScheduleFile } from '../utils/excelParser'
 
@@ -19,7 +20,7 @@ const groupByHospital = (rows) => {
     return acc
   }, new Map())
 
-  return [...groups.values()]
+  return [...groups.values()].sort((a, b) => a.name.localeCompare(b.name))
 }
 
 const demoRows = [
@@ -142,7 +143,7 @@ function Dashboard() {
               <b>0</b> work orders remaining (these are the rest)
             </span>
           </div>
-          <img className="first-upload-avatar" src={philipsLogo} alt="Philips logo" />
+          <img className="first-upload-avatar" src={philipsLogo2} alt="Philips logo" />
         </header>
 
         <section className="first-upload-body">

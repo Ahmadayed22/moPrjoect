@@ -3,12 +3,12 @@ import * as XLSX from 'xlsx'
 const SUPPORTED_EXTENSIONS = ['xlsx', 'xls', 'csv']
 
 const columnAliases = {
-  hospitalName: ['hospital name', 'hospital', 'site'],
-  personName: ['person name', 'person', 'contact name', 'contact'],
-  workOrder: ['work order', 'workorder', 'wo', 'work order id'],
-  primaryFc: ['primary fc', 'primary fse', 'primary'],
-  secondaryFc: ['secondary fc', 'secondary fse', 'secondary'],
-  tertiaryFc: ['tertiary fc', 'tertiary fse', 'tertiary'],
+  hospitalName: ['IP Customer','hospital name', 'hospital', 'site'],
+  personName: ['Customer Contact','person name', 'person', 'contact name', 'contact'],
+  workOrder: ['WO','work order', 'workorder', 'WO', 'work order id'],
+  primaryFc: ['primary fc', 'Primary FSE', 'primary'],
+  secondaryFc: ['secondary fc', 'Secondary FSE', 'secondary'],
+  tertiaryFc: ['tertiary fc', 'Tertiary FSE', 'tertiary'],
 }
 
 const normalizeHeader = (value) =>
@@ -20,7 +20,8 @@ const normalizeHeader = (value) =>
 
 const getCell = (row, aliases) => {
   const entries = Object.entries(row)
-  const match = entries.find(([key]) => aliases.includes(normalizeHeader(key)))
+  const normalizedAliases = aliases.map(normalizeHeader)
+  const match = entries.find(([key]) => normalizedAliases.includes(normalizeHeader(key)))
   return match ? String(match[1] || '').trim() : ''
 }
 

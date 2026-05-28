@@ -76,7 +76,7 @@
   width: 54px;
   height: 54px;
   object-fit: contain;
-  background: #ffffff;
+  /* background: #ffffff; */
   border-radius: 6px;
 }
 
@@ -397,7 +397,7 @@ button {
   width: 72px;
   height: 90px;
   object-fit: contain;
-  background: #ffffff;
+  /* background: #ffffff; */
   border-radius: 6px;
 }
 
@@ -503,10 +503,50 @@ button {
   text-align: left;
 }
 
+.work-order-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.work-order-title a {
+  min-width: 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.work-order-title a:hover {
+  text-decoration: underline;
+}
+
 .order-main strong {
   color: var(--ink);
   font-size: 14px;
   font-weight: 900;
+}
+
+.copy-order-button {
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+  padding: 0;
+  color: var(--philips-blue);
+  background: #eef4fd;
+  border: 1px solid #d8e6f7;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.copy-order-button:hover {
+  background: #dfeeff;
+}
+
+.copy-order-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
 .assignment-grid {
@@ -898,6 +938,21 @@ button {
 
   .order-main strong {
     font-size: 8px;
+  }
+
+  .work-order-title {
+    gap: 3px;
+  }
+
+  .copy-order-button {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+  }
+
+  .copy-order-button svg {
+    width: 8px;
+    height: 8px;
   }
 
   .order-main span {
