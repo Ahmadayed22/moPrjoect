@@ -133,17 +133,13 @@ function Dashboard() {
     return (
       <main className="first-upload-screen">
         <header className="first-upload-header">
-          <div className="first-upload-brand">PHILIPS</div>
+          <div className="first-upload-brand-lockup">
+            <div className="first-upload-brand">PHILIPS</div>
+            <img className="first-upload-avatar" src={philipsLogo} alt="Philips logo" />
+          </div>
           <div className="first-upload-summary">
             <h1>Scheduling Summary</h1>
-            <p>
-              <strong>0</strong> out of <strong>0</strong> work orders already scheduled
-            </p>
-            <span>
-              <b>0</b> work orders remaining (these are the rest)
-            </span>
           </div>
-          <img className="first-upload-avatar" src={philipsLogo} alt="Philips logo" />
         </header>
 
         <section className="first-upload-body">

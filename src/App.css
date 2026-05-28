@@ -14,21 +14,30 @@
 .first-upload-header {
   position: relative;
   display: grid;
-  grid-template-columns: 180px 1fr 180px;
+  grid-template-rows: auto 1fr;
   align-items: start;
-  padding: 20px 26px;
+  padding: 20px 26px 28px;
   color: #ffffff;
   background: #07376f;
 }
 
+.first-upload-brand-lockup {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+}
+
 .first-upload-brand {
+  line-height: 1;
   font-size: 22px;
   font-weight: 900;
   letter-spacing: 1px;
 }
 
 .first-upload-summary {
-  align-self: center;
+  align-self: end;
   justify-self: center;
   text-align: center;
   text-transform: uppercase;
@@ -72,7 +81,6 @@
 }
 
 .first-upload-avatar {
-  justify-self: end;
   width: 100px;
   height: 100px;
   object-fit: contain;
@@ -671,7 +679,7 @@ button {
   }
 
   .first-upload-header {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: none;
     gap: 18px;
     padding: 18px;
   }
@@ -681,8 +689,6 @@ button {
   }
 
   .first-upload-summary {
-    grid-column: 1 / -1;
-    grid-row: 2;
     padding-top: 12px;
   }
 
@@ -720,11 +726,11 @@ button {
     font-size: 16px;
   }
 
-  .philips-mark {
+  /* .philips-mark {
     justify-self: end;
-    width: 38px;
+    width: 100px;
     height: 54px;
-  }
+  } */
 
   .summary-title h1 {
     margin-bottom: 8px;
@@ -1096,6 +1102,48 @@ button {
   .upload-section:not(.upload-section-hero) .primary-action {
     justify-self: center;
     width: auto;
+  }
+}
+
+@media (max-width: 559px) {
+  .work-order-row {
+    grid-template-columns: minmax(62px, 0.48fr) minmax(0, 1fr);
+  }
+
+  .order-main {
+    grid-template-columns: minmax(0, 1fr) 16px;
+    align-items: center;
+    gap: 2px 4px;
+  }
+
+  .work-order-title {
+    display: contents;
+  }
+
+  .work-order-title a {
+    grid-column: 1;
+    grid-row: 1;
+    overflow-wrap: anywhere;
+  }
+
+  .copy-order-button {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    align-self: center;
+  }
+
+  .order-main > span {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .order-main strong {
+    font-size: 7px;
+    line-height: 1.15;
+  }
+
+  .order-main span {
+    font-size: 6px;
   }
 }
 
