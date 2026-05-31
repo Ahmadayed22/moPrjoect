@@ -52,12 +52,15 @@ const isScheduled = (row) => {
   return Boolean(row.primaryFc || row.secondaryFc || row.tertiaryFc)
 }
 
+const PAGE_SIZE = 10
+
 function Dashboard() {
   const dashboardRef = useRef(null)
   const [rows, setRows] = useState([])
   const [fileName, setFileName] = useState('')
   const [search, setSearch] = useState('')
   const [fcFilter, setFcFilter] = useState('')
+  const [currentPage, setCurrentPage] = useState(1)
   const [isLoading, setIsLoading] = useState(false)
   const [isExporting, setIsExporting] = useState(false)
   const [error, setError] = useState('')
@@ -87,7 +90,13 @@ function Dashboard() {
     })
   }, [fcFilter, remainingRows, search])
 
-  const hospitals = useMemo(() => groupByHospital(filteredRows), [filteredRows])
+  const totalPages = Math.max(Math.ceil(filteredRows.length / PAGE_SIZE), 1)
+  const safeCurrentPage = Math.min(currentPage, totalPages)
+  const paginatedRows = useMemo(() => {
+    const startIndex = (safeCurrentPage - 1) * PAGE_SIZE
+    return filteredRows.slice(startIndex, startIndex + PAGE_SIZE)
+  }, [filteredRows, safeCurrentPage])
+  const hospitals = useMemo(() => groupByHospital(paginatedRows), [paginatedRows])
   const scheduledOrders = rows.filter(isScheduled).length
   const remainingOrders = rows.some((row) => row.scheduledStatus)
     ? rows.filter(isUnscheduled).length
@@ -108,6 +117,22 @@ function Dashboard() {
     return Object.entries(counts).sort((a, b) => b[1] - a[1])
   }, [fcFilter, filteredRows])
 
+  const handleSearchChange = (value) => {
+    setSearch(value)
+    setCurrentPage(1)
+  }
+
+  const handleFcFilterChange = (value) => {
+    setFcFilter(value)
+    setCurrentPage(1)
+  }
+
+  const clearFilters = () => {
+    setSearch('')
+    setFcFilter('')
+    setCurrentPage(1)
+  }
+
   const handleFileSelected = async (file) => {
     setIsLoading(true)
     setError('')
@@ -118,6 +143,7 @@ function Dashboard() {
       setFileName(file.name)
       setSearch('')
       setFcFilter('')
+      setCurrentPage(1)
     } catch (fileError) {
       setError(fileError.message)
     } finally {
@@ -143,6 +169,7 @@ function Dashboard() {
     setFileName('Sample data demo')
     setSearch('')
     setFcFilter('')
+    setCurrentPage(1)
     setError('')
   }
 
@@ -188,14 +215,11 @@ function Dashboard() {
           <UploadSection onFileSelected={handleFileSelected} isLoading={isLoading} error={error} />
           <SearchFilterBar
             search={search}
-            onSearchChange={setSearch}
+            onSearchChange={handleSearchChange}
             fcFilter={fcFilter}
-            onFcFilterChange={setFcFilter}
+            onFcFilterChange={handleFcFilterChange}
             fcOptions={fcOptions}
-            onClear={() => {
-              setSearch('')
-              setFcFilter('')
-            }}
+            onClear={clearFilters}
           />
           <ExportButton onExport={handleExport} disabled={!rows.length} isExporting={isExporting} />
         </div>
@@ -222,6 +246,28 @@ function Dashboard() {
             <p>Upload a valid schedule file or clear the current filters.</p>
           </div>
         )}
+
+        {filteredRows.length > PAGE_SIZE ? (
+          <nav className="pagination-controls" aria-label="Work order pagination">
+            <button
+              type="button"
+              onClick={() => setCurrentPage((page) => Math.max(page - 1, 1))}
+              disabled={currentPage === 1}
+            >
+              Previous
+            </button>
+            <span>
+              Page {safeCurrentPage} of {totalPages}
+            </span>
+            <button
+              type="button"
+              onClick={() => setCurrentPage((page) => Math.min(page + 1, totalPages))}
+              disabled={safeCurrentPage === totalPages}
+            >
+              Next
+            </button>
+          </nav>
+        ) : null}
 
         <footer className="dashboard-footer">
           <strong>Primary WO count</strong>

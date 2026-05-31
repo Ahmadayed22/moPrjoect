@@ -424,6 +424,7 @@ button {
 .dashboard-meta,
 .table-header,
 .hospital-list,
+.pagination-controls,
 .dashboard-footer,
 .empty-state {
   width: calc(100% - 44px);
@@ -617,6 +618,41 @@ button {
   font-size: 20px;
 }
 
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.pagination-controls button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  min-width: 92px;
+  padding: 0 14px;
+  color: #ffffff;
+  background: var(--philips-blue);
+  border: 0;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.pagination-controls button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.pagination-controls span {
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 900;
+}
+
 .dashboard-footer {
   display: flex;
   align-items: center;
@@ -777,6 +813,7 @@ button {
   .dashboard-meta,
   .table-header,
   .hospital-list,
+  .pagination-controls,
   .dashboard-footer,
   .empty-state {
     width: calc(100% - 20px);
@@ -1038,6 +1075,24 @@ button {
     min-height: 32px;
     padding: 0 10px;
     border-radius: 4px;
+    font-size: 8px;
+    white-space: nowrap;
+  }
+
+  .pagination-controls {
+    gap: 6px;
+    margin-top: 9px;
+  }
+
+  .pagination-controls button {
+    min-height: 28px;
+    min-width: 62px;
+    padding: 0 9px;
+    border-radius: 4px;
+    font-size: 8px;
+  }
+
+  .pagination-controls span {
     font-size: 8px;
     white-space: nowrap;
   }
